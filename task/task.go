@@ -5,5 +5,5 @@ type Task struct {
 	Title       string
 	Description string
 	DueDate     string
-	Status      string // pending, completed, etc.
+	Status      string
 }

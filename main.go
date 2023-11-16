@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"task-manager/task"
 	"task-manager/utils"
 )
@@ -20,13 +21,25 @@ func main() {
 
 		switch choice {
 		case "1":
-			taskManager.AddTask(&task.Task{ID: 1, Title: "", Description: "", DueDate: "", Status: ""})
+			title := utils.GetUserInput("Provide title")
+			description := utils.GetUserInput("Provide description")
+			dueDate := utils.GetUserInput("Provide due date")
+			taskManager.AddTask(&task.Task{ID: 1, Title: title, Description: description, DueDate: dueDate, Status: "NEW"})
 		case "2":
-			// Logic to view tasks
+			tasks := taskManager.ViewTasks()
+			for _, task := range tasks {
+				fmt.Printf("ID: %d, Title: %s\n", task.ID, task.Title)
+			}
+
 		case "3":
-			// Logic to update a task
+			title := utils.GetUserInput("Provide title")
+			description := utils.GetUserInput("Provide description")
+			dueDate := utils.GetUserInput("Provide due date")
+			taskManager.UpdateTask(1, &task.Task{ID: 1, Title: title, Description: description, DueDate: dueDate, Status: "NEW"})
 		case "4":
-			// Logic to delete a task
+			inputId := utils.GetUserInput("Provide id")
+			id, _ := strconv.Atoi(inputId)
+			taskManager.DeleteTask(id)
 		case "5":
 			fmt.Println("Exiting Task Management System. Goodbye!")
 			return
